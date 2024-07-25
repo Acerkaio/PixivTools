@@ -30,9 +30,9 @@
 <body id="body">
 
 
-  <mdui-layout>
-    <mdui-top-app-bar class="example-top-app-bar">
-      <mdui-button-icon icon="heart"><ion-icon name="heart"></ion-icon>
+  <mdui-layout style="height: 100vh;">
+    <mdui-top-app-bar class="top-app-bar">
+      <mdui-button-icon icon="menu"><ion-icon name="menu" id="menu"></ion-icon>
       </mdui-button-icon>
       <mdui-top-app-bar-title>Pixiv Tools</mdui-top-app-bar-title>
       <div style="flex-grow: 1"></div>
@@ -40,15 +40,16 @@
           name="sunny-outline"></ion-icon></mdui-button-icon>
     </mdui-top-app-bar>
 
-    <mdui-navigation-drawer open class="example-navigation-drawer" style="width: 200px">
+    <mdui-navigation-drawer open="false" class="navigation-drawer" style="width: 200px" id="navigation-drawer">
       <mdui-list>
         <a style="text-decoration: none;" href="../index.html"><mdui-list-item>PID to IMG</mdui-list-item></a>
         <mdui-list-item>Search Keyword</mdui-list-item>
         <mdui-list-item>More...</mdui-list-item>
+        <mdui-list-item id="CLOSENavigationDrawer"><ion-icon name="arrow-dropleft"></ion-icon>返回</mdui-list-item>
       </mdui-list>
     </mdui-navigation-drawer>
 
-    <mdui-layout-main class="example-layout-main" style="min-height: 300px; margin: 20px; height: 90vh !important;">
+    <mdui-layout-main class="layout-main" style="min-height: 300px; margin: 20px; height: 90vh !important;">
       <mdui-text-field id="TEXTofFIELD" label="Input Keyword" helper="输入关键词，可用中文，多个请用 | 隔开但不要空格"
         helper-on-focus></mdui-text-field>
       <div style="margin-top: 0px;">
@@ -75,6 +76,29 @@
     $('#SwitchStyle').click(function () {
       SwitchStyle();
     });
+  </script>
+  <script>
+    var FLofMenu = 0;
+    const navigationDrawer = document.getElementById('navigation-drawer');
+    $('#menu').click(function () {
+      if (FLofMenu == 0) {
+        FLofMenu = 1;
+        navigationDrawer.open = true;
+      } else {
+        FLofMenu = 0;
+        navigationDrawer.open = false;
+      }
+    })
+
+    $('#CLOSENavigationDrawer').click(function () {
+      if (FLofMenu == 0) {
+        FLofMenu = 1;
+        navigationDrawer.open = true;
+      } else {
+        FLofMenu = 0;
+        navigationDrawer.open = false;
+      }
+    })
   </script>
   <script src="./list.js"></script>
   <script>

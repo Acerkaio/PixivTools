@@ -20,9 +20,9 @@
 <body id="body">
 
 
-  <mdui-layout>
-    <mdui-top-app-bar class="example-top-app-bar">
-      <mdui-button-icon icon="heart"><ion-icon name="heart"></ion-icon>
+  <mdui-layout style="height: 100vh;">
+    <mdui-top-app-bar class="top-app-bar">
+      <mdui-button-icon icon="menu"><ion-icon name="menu" id="menu"></ion-icon>
       </mdui-button-icon>
       <mdui-top-app-bar-title>Pixiv Tools</mdui-top-app-bar-title>
       <div style="flex-grow: 1"></div>
@@ -30,16 +30,19 @@
           name="sunny-outline"></ion-icon></mdui-button-icon>
     </mdui-top-app-bar>
 
-    <mdui-navigation-drawer open class="example-navigation-drawer" style="width: 200px">
+    <mdui-navigation-drawer open="false" class="navigation-drawer" style="width: 200px;" contained
+      id="navigation-drawer">
       <mdui-list>
         <mdui-list-item>PID to IMG</mdui-list-item>
         <a href="./randsearch/index.html" style="text-decoration: none;"><mdui-list-item>Search</mdui-list-item></a>
-        <a href="./keyword/index.html" style="text-decoration: none;"><mdui-list-item>Keywords(2024.7.25 废弃)</mdui-list-item></a>
+        <a href="./keyword/index.html" style="text-decoration: none;"><mdui-list-item>Keywords(2024.7.25
+            废弃)</mdui-list-item></a>
         <mdui-list-item>More...</mdui-list-item>
+        <mdui-list-item id="CLOSENavigationDrawer"><ion-icon name="arrow-dropleft"></ion-icon>返回</mdui-list-item>
       </mdui-list>
     </mdui-navigation-drawer>
 
-    <mdui-layout-main class="example-layout-main" style="min-height: 300px; margin: 20px;">
+    <mdui-layout-main class="layout-main" style="min-height: 300px; margin: 20px;">
       <div style="text-align: center; width: 100%; height: fit-content; min-height: 300px;">
         <img src="" alt="" id="SHOWPHOTO">
       </div>
@@ -73,6 +76,29 @@
   </script>
   <script src="./js/ChangeStyle.js"></script>
   <script>
+    var FLofMenu = 0;
+    const navigationDrawer = document.getElementById('navigation-drawer');
+    $('#menu').click(function () {
+      if (FLofMenu == 0) {
+        FLofMenu = 1;
+        navigationDrawer.open = true;
+      } else {
+        FLofMenu = 0;
+        navigationDrawer.open = false;
+      }
+    })
+
+    $('#CLOSENavigationDrawer').click(function () {
+      if (FLofMenu == 0) {
+        FLofMenu = 1;
+        navigationDrawer.open = true;
+      } else {
+        FLofMenu = 0;
+        navigationDrawer.open = false;
+      }
+    })
+  </script>
+  <script>
     $('#Download').click(function () {
       // console.log();
       downloadIamge('https://pixiv.re/' + $('#TEXTofFIELD').val() + $('#IMGformat').val(), $('#TEXTofFIELD').val())
@@ -88,11 +114,11 @@
         canvas.height = image.height;
         let context = canvas.getContext("2d");
         context.drawImage(image, 0, 0, image.width, image.height);
-        let url = canvas.toDataURL("image/png"); 
-        let a = document.createElement("a"); 
-        let event = new MouseEvent("click"); 
-        a.download = name || "photo"; 
-        a.href = url; 
+        let url = canvas.toDataURL("image/png");
+        let a = document.createElement("a");
+        let event = new MouseEvent("click");
+        a.download = name || "photo";
+        a.href = url;
         a.dispatchEvent(event);
       };
       image.src = imgsrc;
