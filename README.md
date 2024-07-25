@@ -27,3 +27,9 @@ anosu.top
 - jQuery
 
 Made by Acerkaio.
+
+## 注意事项
+
+请不要请求过快 !!! API 不是我的!!!
+
+合理使用, 注意身体。

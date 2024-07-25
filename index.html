@@ -33,14 +33,14 @@
     <mdui-navigation-drawer open class="example-navigation-drawer" style="width: 200px">
       <mdui-list>
         <mdui-list-item>PID to IMG</mdui-list-item>
-        <a href="./keyword/index.html" style="text-decoration: none;"><mdui-list-item>Search Keyword</mdui-list-item></a>
+        <a href="./randsearch/index.html" style="text-decoration: none;"><mdui-list-item>Search</mdui-list-item></a>
+        <a href="./keyword/index.html" style="text-decoration: none;"><mdui-list-item>Keywords(2024.7.25 废弃)</mdui-list-item></a>
         <mdui-list-item>More...</mdui-list-item>
       </mdui-list>
     </mdui-navigation-drawer>
 
     <mdui-layout-main class="example-layout-main" style="min-height: 300px; margin: 20px;">
       <div style="text-align: center; width: 100%; height: fit-content; min-height: 300px;">
-        <!-- <mdui-linear-progress></mdui-linear-progress> -->
         <img src="" alt="" id="SHOWPHOTO">
       </div>
       <mdui-text-field id="TEXTofFIELD" label="input PID" helper="如果有多副图像请在PID后加上 -num"
@@ -81,7 +81,6 @@
   <script>
     function downloadIamge(imgsrc, name) {
       let image = new Image();
-      // 解决跨域 Canvas 污染问题
       image.setAttribute("crossOrigin", "anonymous");
       image.onload = function () {
         let canvas = document.createElement("canvas");
@@ -89,12 +88,12 @@
         canvas.height = image.height;
         let context = canvas.getContext("2d");
         context.drawImage(image, 0, 0, image.width, image.height);
-        let url = canvas.toDataURL("image/png"); //得到图片的base64编码数据
-        let a = document.createElement("a"); // 生成一个a元素
-        let event = new MouseEvent("click"); // 创建一个单击事件
-        a.download = name || "photo"; // 设置图片名称
-        a.href = url; // 将生成的URL设置为a.href属性
-        a.dispatchEvent(event); // 触发a的单击事件
+        let url = canvas.toDataURL("image/png"); 
+        let a = document.createElement("a"); 
+        let event = new MouseEvent("click"); 
+        a.download = name || "photo"; 
+        a.href = url; 
+        a.dispatchEvent(event);
       };
       image.src = imgsrc;
     }
@@ -132,7 +131,7 @@
       }
     });
   </script>
-  <mdui-snackbar closeable class="example-closeable">Photo Loading(如果长时间未显示请检查 PID 是否正确)</mdui-snackbar>
+  <mdui-snackbar closeable class="example-closeable">正在为您准备下一张图片(如果长时间未显示请检查 PID 是否正确)</mdui-snackbar>
   <mdui-snackbar closeable class="PHsuc">Photo Loaded!</mdui-snackbar>
 
 
