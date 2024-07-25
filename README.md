@@ -12,9 +12,15 @@
 
 pixiv.re
 
+## api
+
+anosu.top
+
 ## 致谢
 
 - pixiv.re
+
+- anosu.top
 
 - MDUI
 
