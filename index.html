@@ -1,0 +1,146 @@
+<!-- start on 2.11 2024  -->
+<!doctype html>
+<html lang="zh-CN" class="mdui-theme-light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" />
+  <meta name="renderer" content="webkit" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+  <link rel="stylesheet" href="https://unpkg.com/mdui@2.0.3/mdui.css">
+  <script src="https://unpkg.com/mdui@2.0.3/mdui.global.js"></script>
+
+  <title>Pixiv Tools</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/list.css">
+
+</head>
+
+<body id="body">
+
+
+  <mdui-layout>
+    <mdui-top-app-bar class="example-top-app-bar">
+      <mdui-button-icon icon="heart"><ion-icon name="heart"></ion-icon>
+      </mdui-button-icon>
+      <mdui-top-app-bar-title>Pixiv Tools</mdui-top-app-bar-title>
+      <div style="flex-grow: 1"></div>
+      <mdui-button-icon icon="sunny-outline" id="SwitchStyle"><ion-icon
+          name="sunny-outline"></ion-icon></mdui-button-icon>
+    </mdui-top-app-bar>
+
+    <mdui-navigation-drawer open class="example-navigation-drawer" style="width: 200px">
+      <mdui-list>
+        <mdui-list-item>PID to IMG</mdui-list-item>
+        <mdui-list-item>More...</mdui-list-item>
+      </mdui-list>
+    </mdui-navigation-drawer>
+
+    <mdui-layout-main class="example-layout-main" style="min-height: 300px; margin: 20px;">
+      <div style="text-align: center; width: 100%; height: fit-content; min-height: 300px;">
+        <!-- <mdui-linear-progress></mdui-linear-progress> -->
+        <img src="" alt="" id="SHOWPHOTO">
+      </div>
+      <mdui-text-field id="TEXTofFIELD" label="input PID" helper="如果有多副图像请在PID后加上 -num"
+        helper-on-focus></mdui-text-field>
+      <div style="margin-top: 0px;">
+        <mdui-button id="GetPhoto" full-width>Get</mdui-button>
+        <div style="margin-top: 4px;">
+          <mdui-radio-group value=".png" id="IMGformat">
+            <mdui-radio value=".png">.PNG</mdui-radio>
+            <mdui-radio value=".jpg">.JPG</mdui-radio>
+            <mdui-radio value=".gif">.GIF</mdui-radio>
+          </mdui-radio-group>
+          <span style="margin-left: 20px;">
+            <mdui-button id="Download">Download</mdui-button><mdui-button loading disabled>Batch Download</mdui-button>
+          </span>
+        </div>
+      </div>
+    </mdui-layout-main>
+  </mdui-layout>
+
+
+  <!-- JQ -->
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.js"></script>
+  <!-- ionicons -->
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+  <!-- Change Style -->
+  <script>
+    mdui.setColorScheme('#031B77');
+  </script>
+  <script src="./js/ChangeStyle.js"></script>
+  <script>
+    $('#Download').click(function () {
+      // console.log();
+      downloadIamge('https://pixiv.re/' + $('#TEXTofFIELD').val() + $('#IMGformat').val(), $('#TEXTofFIELD').val())
+    })
+  </script>
+  <script>
+    function downloadIamge(imgsrc, name) {
+      let image = new Image();
+      // 解决跨域 Canvas 污染问题
+      image.setAttribute("crossOrigin", "anonymous");
+      image.onload = function () {
+        let canvas = document.createElement("canvas");
+        canvas.width = image.width;
+        canvas.height = image.height;
+        let context = canvas.getContext("2d");
+        context.drawImage(image, 0, 0, image.width, image.height);
+        let url = canvas.toDataURL("image/png"); //得到图片的base64编码数据
+        let a = document.createElement("a"); // 生成一个a元素
+        let event = new MouseEvent("click"); // 创建一个单击事件
+        a.download = name || "photo"; // 设置图片名称
+        a.href = url; // 将生成的URL设置为a.href属性
+        a.dispatchEvent(event); // 触发a的单击事件
+      };
+      image.src = imgsrc;
+    }
+
+  </script>
+  <script>
+    $('#SwitchStyle').click(function () {
+      SwitchStyle();
+    });
+  </script>
+  <script>
+    $('#GetPhoto').click(function () {
+      $('#SHOWPHOTO').attr('src', 'https://pixiv.re/' + $('#TEXTofFIELD').val() + $('#IMGformat').val());
+      let img = document.getElementById('SHOWPHOTO');
+      img.onload = function () {
+        const snackbar = document.querySelector(".example-closeable");
+        const snackbar2 = document.querySelector(".PHsuc");
+        snackbar2.open = true;
+        snackbar.open = false;
+      }
+    });
+    $('#TEXTofFIELD').keypress(function (event) {
+      var keynum = (event.keyCode ? event.keyCode : event.which);
+      if (keynum == '13') {
+        const snackbar = document.querySelector(".example-closeable");
+        $('#SHOWPHOTO').attr('src', 'https://pixiv.re/' + $('#TEXTofFIELD').val() + $('#IMGformat').val());
+        snackbar.open = true;
+        let img = document.getElementById('SHOWPHOTO');
+        img.onload = function () {
+          const snackbar = document.querySelector(".example-closeable");
+          const snackbar2 = document.querySelector(".PHsuc");
+          snackbar2.open = true;
+          snackbar.open = false;
+        }
+      }
+    });
+  </script>
+  <mdui-snackbar closeable class="example-closeable">Photo Loading(如果长时间未显示请检查 PID 是否正确)</mdui-snackbar>
+  <mdui-snackbar closeable class="PHsuc">Photo Loaded!</mdui-snackbar>
+
+
+  <script>
+    const snackbar = document.querySelector(".example-closeable");
+    const openButton = document.getElementById('GetPhoto');
+
+    openButton.addEventListener("click", () => snackbar.open = true);
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,8 @@
+body {
+    padding: 0;
+    margin: 0;
+}
+#SHOWPHOTO {
+    max-width: 800px;
+    margin: 0 auto;
+}
