@@ -10,9 +10,10 @@ function list(keyword) {
         async: true,
         dataType: "json",
         success: function (res) {
-            console.log(res);
+            // console.log(res);
+            ans = res;
             for (var id in res) {
-                console.log(res[id].pid);
+                // console.log(res[id].pid);
                 const img = new Image();
                 var width = res[id].width;
                 var height = res[id].height;
@@ -26,7 +27,7 @@ function list(keyword) {
                 newItem.style.height = height + 'px';
                 newItem.style.transform = `translate(${minIndex * (300 + 20) + pdS}px, ${sumHeight[minIndex]}px)`;
                 newItem.innerHTML = `
-                <img src="${res[id].url}" alt="ERR" style="width: 300px; height: auto;">
+                <img src="https://pixiv.re/${res[id].pid}.png" alt="ERR" style="width: 300px; height: auto;">
 
                 `
                 document.getElementById("container").appendChild(newItem);

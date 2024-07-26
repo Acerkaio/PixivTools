@@ -54,7 +54,8 @@
       <mdui-text-field id="TEXTofFIELD" label="Input Keyword" helper="输入关键词，可用中文，多个请用 | 隔开但不要空格"
         helper-on-focus></mdui-text-field>
       <div style="margin-top: 0px;">
-        <mdui-button id="GetPhoto" full-width>Search</mdui-button>
+        <mdui-button id="GetPhoto" >搜索</mdui-button>
+        <mdui-button id="DOWNLOADALL" style="margin-top: 4px;" >批量下载</mdui-button>
       </div>
       <div class="list" id="container" style="height: fit-content !important; margin-top: 20px;">
 
@@ -89,11 +90,47 @@
       navigationDrawer.open = false;
     })
   </script>
+  <script>
+    var ans;
+  </script>
   <script src="./list.js"></script>
   <script>
     $('#GetPhoto').click(function () {
       list($('#TEXTofFIELD').val());
     })
+  </script>
+  <script>
+    $('#DOWNLOADALL').click(function () {
+        downloadAll();
+    })
+    function downloadIamge(imgsrc, name) {
+      let image = new Image();
+      image.setAttribute("crossOrigin", "anonymous");
+      console.log('Prepared');
+      image.onload = function () {
+        console.log('Loading');
+        let canvas = document.createElement("canvas");
+        canvas.width = image.width;
+        canvas.height = image.height;
+        let context = canvas.getContext("2d");
+        context.drawImage(image, 0, 0, image.width, image.height);
+        let url = canvas.toDataURL("image/png");
+        let a = document.createElement("a");
+        let event = new MouseEvent("click");
+        a.download = name || "photo";
+        a.href = url;
+        a.dispatchEvent(event);
+        console.log('OK!');
+      };
+      image.src = imgsrc;
+    }
+    function downloadAll() {
+      for (var id in ans) {
+        downloadIamge('https://pixiv.re/' + ans[id].pid + '.png', ans[id].pid + '.png')
+      }
+    }
+
+
   </script>
 </body>
 
