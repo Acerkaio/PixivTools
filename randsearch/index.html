@@ -54,8 +54,8 @@
       <mdui-text-field id="TEXTofFIELD" label="Input Keyword" helper="输入关键词，可用中文，多个请用 | 隔开但不要空格"
         helper-on-focus></mdui-text-field>
       <div style="margin-top: 0px;">
-        <mdui-button id="GetPhoto" >搜索</mdui-button>
-        <mdui-button id="DOWNLOADALL" style="margin-top: 4px;" >批量下载</mdui-button>
+        <mdui-button id="GetPhoto">搜索</mdui-button>
+        <mdui-button id="DOWNLOADALL" style="margin-top: 4px;">批量下载</mdui-button>
       </div>
       <div class="list" id="container" style="height: fit-content !important; margin-top: 20px;">
 
@@ -66,6 +66,8 @@
 
   <!-- JQ -->
   <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.js"></script>
+  <!-- update -->
+  <script src="../js/update.js"></script>
   <!-- ionicons -->
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
@@ -101,7 +103,7 @@
   </script>
   <script>
     $('#DOWNLOADALL').click(function () {
-        downloadAll();
+      downloadAll();
     })
     function downloadIamge(imgsrc, name) {
       let image = new Image();
