@@ -62,7 +62,10 @@
       </div>
     </mdui-layout-main>
   </mdui-layout>
-
+  <mdui-snackbar closeable class="TIPsearch-outline">
+    Searching
+    <mdui-avatar slot="close-button" icon="search-outline"><ion-icon name="search-outline"></ion-icon></mdui-avatar>
+  </mdui-snackbar>
 
   <!-- JQ -->
   <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.js"></script>
@@ -99,6 +102,16 @@
   <script>
     $('#GetPhoto').click(function () {
       list($('#TEXTofFIELD').val());
+      snackbar = document.querySelector(".TIPsearch-outline");
+      snackbar.open = true;
+    })
+    $('#TEXTofFIELD').keypress(function (event) {
+      var keynum = (event.keyCode ? event.keyCode : event.which);
+      if (keynum == '13') {
+        list($('#TEXTofFIELD').val());
+        snackbar = document.querySelector(".TIPsearch-outline");
+        snackbar.open = true;
+      }
     })
   </script>
   <script>
