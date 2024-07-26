@@ -10,6 +10,7 @@
 
   <link rel="stylesheet" href="https://unpkg.com/mdui@2.0.3/mdui.css">
   <script src="https://unpkg.com/mdui@2.0.3/mdui.global.js"></script>
+  <link rel="Shortcut Icon" href="../logo(64x).ico" type="image/x-icon" />
 
   <title>Pixiv Tools</title>
   <link rel="stylesheet" href=".././css/style.css">
@@ -141,7 +142,9 @@
     }
     function downloadAll() {
       for (var id in ans) {
-        downloadIamge('https://pixiv.re/' + ans[id].pid + '.png', ans[id].pid + '.png')
+        setTimeout(() => {
+          downloadIamge('https://pixiv.re/' + ans[id].pid + '.png', ans[id].pid + '.png')
+        }, id * 2000);
       }
     }
 
