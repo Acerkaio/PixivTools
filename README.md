@@ -16,11 +16,17 @@ pixiv.re
 
 anosu.top
 
+## 构建
+
+[Pake](https://github.acerkaio.top/tw93/Pake)
+
 ## 致谢
 
 - pixiv.re
 
 - anosu.top
+
+- Pake
 
 - MDUI
 
