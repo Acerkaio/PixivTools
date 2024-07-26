@@ -31,8 +31,8 @@
 
 
   <mdui-layout style="height: 100vh;">
-    <mdui-top-app-bar class="top-app-bar" id="menu">
-      <mdui-button-icon icon="menu"><ion-icon name="menu"></ion-icon>
+    <mdui-top-app-bar class="top-app-bar">
+      <mdui-button-icon icon="menu" id="menu"><ion-icon name="menu"></ion-icon>
       </mdui-button-icon>
       <mdui-top-app-bar-title>Pixiv Tools</mdui-top-app-bar-title>
       <div style="flex-grow: 1"></div>
@@ -40,7 +40,8 @@
           name="sunny-outline"></ion-icon></mdui-button-icon>
     </mdui-top-app-bar>
 
-    <mdui-navigation-drawer open="false" class="navigation-drawer" id="navigation-drawer" style="width: 100%" close-on-esc close-on-overlay-click contained modal="true">
+    <mdui-navigation-drawer open="false" class="navigation-drawer" id="navigation-drawer" style="width: 100%"
+      close-on-esc close-on-overlay-click contained modal="true">
       <mdui-list>
         <a style="text-decoration: none;" href="../index.html"><mdui-list-item>PID to IMG</mdui-list-item></a>
         <mdui-list-item>Search Keyword</mdui-list-item>
@@ -81,23 +82,11 @@
     var FLofMenu = 0;
     const navigationDrawer = document.getElementById('navigation-drawer');
     $('#menu').click(function () {
-      if (FLofMenu == 0) {
-        FLofMenu = 1;
-        navigationDrawer.open = true;
-      } else {
-        FLofMenu = 0;
-        navigationDrawer.open = false;
-      }
+      navigationDrawer.open = true;
     })
 
     $('#CLOSENavigationDrawer').click(function () {
-      if (FLofMenu == 0) {
-        FLofMenu = 1;
-        navigationDrawer.open = true;
-      } else {
-        FLofMenu = 0;
-        navigationDrawer.open = false;
-      }
+      navigationDrawer.open = false;
     })
   </script>
   <script src="./list.js"></script>
