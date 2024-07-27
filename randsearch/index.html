@@ -140,11 +140,16 @@
       };
       image.src = imgsrc;
     }
+    function acdownload(id, pid) {
+      setTimeout(() => {
+        downloadIamge('https://pixiv.re/' + pid + '.png', pid + '.png')
+      }, id * 5000);
+    }
     function downloadAll() {
       for (var id in ans) {
-        setTimeout(() => {
-          downloadIamge('https://pixiv.re/' + ans[id].pid + '.png', ans[id].pid + '.png')
-        }, id * 2000);
+        let newID = id;
+        console.log('Downloading: ' + ans[newID].pid);
+        acdownload(id, ans[id].pid);
       }
     }
 

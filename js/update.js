@@ -1,5 +1,5 @@
 // 命名规则: 主版本号.功能更新数.bug修复或小更新数
-var ver = "1.1.2";
+var ver = "1.1.3";
 var OldVersion = localStorage.getItem("version");
 if (OldVersion != ver) {
     localStorage.setItem("version", ver);
@@ -7,6 +7,8 @@ if (OldVersion != ver) {
         <mdui-dialog close-on-esc class="ver-overlay">
             按下 ESC 关闭
             <h2>版本: ${ver}</h2>
+            <p>修复上次更新带来图片重复下载的 bug. (bug fixed)</p>
+            <h3>版本 1.1.2</h3>
             <h4>[2024.7.27 07:57] 更新内容: </h4>
             <p>下载设置了等待，减少内存压力(+)</p>
             <p>图标增加(+)</p>
