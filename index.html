@@ -25,7 +25,7 @@
     <mdui-top-app-bar class="top-app-bar">
       <mdui-button-icon icon="menu" id="menu"><ion-icon name="menu"></ion-icon>
       </mdui-button-icon>
-      <mdui-top-app-bar-title>Pixiv Tools</mdui-top-app-bar-title>
+      <mdui-top-app-bar-title>Pixiv Tools | PID</mdui-top-app-bar-title>
       <div style="flex-grow: 1"></div>
       <mdui-button-icon icon="sunny-outline" id="SwitchStyle"><ion-icon
           name="sunny-outline"></ion-icon></mdui-button-icon>
@@ -33,9 +33,9 @@
 
     <mdui-navigation-drawer open="false" class="navigation-drawer" style="width: 100%" close-on-esc
       close-on-overlay-click contained modal="true" id="navigation-drawer">
-      <mdui-list>
-        <mdui-list-item>PID to IMG</mdui-list-item>
-        <a href="./randsearch/index.html" style="text-decoration: none;"><mdui-list-item>Search</mdui-list-item></a>
+      <mdui-list><a style="text-decoration: none;" href="./index.html"><mdui-list-item>PID to IMG</mdui-list-item></a>
+        <a style="text-decoration: none;" href="./randsearch/index.html"><mdui-list-item>Search</mdui-list-item></a>
+        <a style="text-decoration: none;" href="./illustrator/index.html"><mdui-list-item>illustrator</mdui-list-item></a>
         <mdui-list-item>More...</mdui-list-item>
         <mdui-list-item id="CLOSENavigationDrawer"><ion-icon name="arrow-dropleft"></ion-icon>返回</mdui-list-item>
       </mdui-list>
@@ -64,7 +64,8 @@
   </mdui-layout>
 
   <!-- JQ -->
-  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.js"></script>
+  <!-- <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.js"></script> -->
+  <script src="./js/Jquery/jq.min.js"></script>
   <!-- update -->
   <script src="./js/update.js"></script>
   <!-- ionicons -->
