@@ -16,6 +16,8 @@ pixiv.re
 
 anosu.top
 
+pximg.org
+
 ## 构建
 
 [Pake](https://github.acerkaio.top/tw93/Pake)
@@ -31,6 +33,10 @@ anosu.top
 - MDUI
 
 - jQuery
+
+- pximg.org
+
+- vercel
 
 Made by Acerkaio.
 
