@@ -123,7 +123,7 @@
       const b = await new Promise((resolve, reject) => {
         $.ajax({
           type: "GET",
-          url: "https://api.acerkaio.top/" + uid,
+          url: "https://api.acerkaio.top/uid/" + uid,
           dataType: "json",
           success: function (res) {
             res = res.body.user_illust_ids;
