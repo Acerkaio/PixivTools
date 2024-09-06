@@ -30,7 +30,7 @@
       max-width: 620px;
       margin: 0 auto;
       margin-bottom: 20px;
-
+      text-align: center;
     }
 
     .Aimg>img {
@@ -58,7 +58,8 @@
       <mdui-list>
         <a style="text-decoration: none;" href="../index.html"><mdui-list-item>PID to IMG</mdui-list-item></a>
         <a style="text-decoration: none;" href="../randsearch/index.html"><mdui-list-item>Search</mdui-list-item></a>
-        <a style="text-decoration: none;" href="../illustrator/index.html"><mdui-list-item>illustrator</mdui-list-item></a>
+        <a style="text-decoration: none;"
+          href="../illustrator/index.html"><mdui-list-item>illustrator</mdui-list-item></a>
         <mdui-list-item>More...</mdui-list-item>
         <mdui-list-item id="CLOSENavigationDrawer"><ion-icon name="arrow-dropleft"></ion-icon>返回</mdui-list-item>
       </mdui-list>
@@ -66,7 +67,9 @@
 
     <mdui-layout-main class="layout-main" style="min-height: 300px; margin: 20px; height: 90vh !important;">
       <div class="list" id="container" style="height: fit-content !important; margin-top: 20px;">
-
+        <div style="margin: 0 auto; text-align: center;">
+          <mdui-circular-progress style="margin: 0 auto;"></mdui-circular-progress>
+        </div>
       </div>
     </mdui-layout-main>
   </mdui-layout>
@@ -109,7 +112,7 @@
     })
   </script>
   <!-- <script src="./list.js"></script> -->
-  
+
   <script>
     var ans = [], lasted = 0;
     var page = [];
@@ -147,7 +150,7 @@
 
       })
 
-      console.log(lasted);
+      // console.log(lasted);
 
 
     }
@@ -157,14 +160,14 @@
     function clk(id) {
       page[id]++;
       if (page[id] == 1)
-      $(`#sch${id}`).attr('src', `https://pixiv.re/${ans[id]}.png`);
+        $(`#sch${id}`).attr('src', `https://pixiv.re/${ans[id]}.png`);
       else $(`#sch${id}`).attr('src', `https://pixiv.re/${ans[id]}-${page[id]}.png`);
     }
     function flk(id) {
       if (page[id] > 1)
         page[id]--;
       if (page[id] == 1)
-      $(`#sch${id}`).attr('src', `https://pixiv.re/${ans[id]}.png`);
+        $(`#sch${id}`).attr('src', `https://pixiv.re/${ans[id]}.png`);
       else $(`#sch${id}`).attr('src', `https://pixiv.re/${ans[id]}-${page[id]}.png`);
     }
 
