@@ -112,10 +112,52 @@
     })
   </script>
   <!-- <script src="./list.js"></script> -->
-
   <script>
     var ans = [], lasted = 0;
-    var page = [];
+    var page = [], url = [];
+  </script>
+  <script>
+    function inscf(pid, id) {
+      $.ajax({
+        type: "GET",
+        url: "https://api.acerkaio.top/pid/" + pid,
+        dataType: "json",
+        success: function (res) {
+          res = res.origin;
+          url[id] = res;
+        }
+      })
+    }
+  </script>
+
+  <script>
+    async function wt() {
+      const b = await new Promise((resolve, reject) => {
+        $.ajax({
+          type: "GET",
+          url: "https://api.acerkaio.top/pid/87740032",
+          dataType: "json",
+          success: function (res) {
+            setTimeout(function () {
+              resolve('time')
+            }, 500)
+          }
+        })
+      })
+      for (var oo in url) {
+        $('#container').html($('#container').html() +
+          `
+              <br>
+              <div class="Aimg" >
+                <img src="${url[oo]}" id="sch${oo}" alt="IMG ERROR">
+              </div>  
+              <div style="margin: 0 auto; text-align:center;"><mdui-button onclick=flk(${oo})>BACK</mdui-button> <mdui-button onclick=clk(${oo})>NEXT</mdui-button></div>
+              <br>
+        `
+        );
+      }
+
+    }
     async function GETrank(pages) {
       const b = await new Promise((resolve, reject) => {
         $.ajax({
@@ -130,18 +172,20 @@
             for (var id in res) {
               lasted = id;
               page[id] = 1;
-              $('#container').html($('#container').html() +
-                `
-              <br>
-              <div class="Aimg" >
-                <img src="https://pixiv.re/${res[id]}.png" id="sch${id}" alt="IMG ERROR">
-              </div>  
-              <div style="margin: 0 auto; text-align:center;"><mdui-button onclick=flk(${id})>BACK</mdui-button> <mdui-button onclick=clk(${id})>NEXT</mdui-button></div>
-              <br>
-              `
-              );
+              // $('#container').html($('#container').html() +
+              //   `
+              // <br>
+              // <div class="Aimg" >
+              //   <img src="https://pixiv.re/${res[id]}.png" id="sch${id}" alt="IMG ERROR">
+              // </div>  
+              // <div style="margin: 0 auto; text-align:center;"><mdui-button onclick=flk(${id})>BACK</mdui-button> <mdui-button onclick=clk(${id})>NEXT</mdui-button></div>
+              // <br>
+              // `
+              // );
+              inscf(res[id], id);
 
             }
+            wt();
             setTimeout(function () {
               resolve('time')
             }, 500)
@@ -151,10 +195,10 @@
       })
 
       // console.log(lasted);
-
-
     }
     GETrank(1);
+
+
   </script>
   <script>
     function clk(id) {

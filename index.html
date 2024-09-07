@@ -46,7 +46,7 @@
       <div style="text-align: center; width: 100%; height: fit-content; min-height: 300px;">
         <img src="" alt="" id="SHOWPHOTO">
       </div>
-      <mdui-text-field id="TEXTofFIELD" label="input PID" helper="如果有多副图像请在PID后加上 -num"
+      <mdui-text-field id="TEXTofFIELD" label="input PID" helper="如果有多副图像请在PID后加上 -num!!!cf.acerkaio.top 暂不支持"
         helper-on-focus></mdui-text-field>
       <div style="margin-top: 0px;">
         <mdui-button id="GetPhoto" full-width>Get</mdui-button>
@@ -55,6 +55,11 @@
             <mdui-radio value=".png">.PNG</mdui-radio>
             <mdui-radio value=".jpg">.JPG</mdui-radio>
             <mdui-radio value=".gif">.GIF</mdui-radio>
+          </mdui-radio-group>
+
+          <mdui-radio-group value="1" id="proxy">
+            <mdui-radio value="1">pixiv.re</mdui-radio>
+            <mdui-radio value="2">cf.acerkaio.top</mdui-radio>
           </mdui-radio-group>
           <span style="margin-left: 20px;">
             <mdui-button id="Download">Download</mdui-button><mdui-button loading disabled>Batch Download</mdui-button>
@@ -119,9 +124,22 @@
       SwitchStyle();
     });
   </script>
+  <script src="./js/pidtolk.js"></script>
   <script>
     $('#GetPhoto').click(function () {
-      $('#SHOWPHOTO').attr('src', 'https://pixiv.re/' + $('#TEXTofFIELD').val() + $('#IMGformat').val());
+      if ($('#proxy').val() == 1)
+        $('#SHOWPHOTO').attr('src', 'https://pixiv.re/' + $('#TEXTofFIELD').val() + $('#IMGformat').val());
+      else {
+        $.ajax({
+          type: "GET",
+          url: "https://api.acerkaio.top/pid/" + $('#TEXTofFIELD').val(),
+          dataType: "json",
+          success: function (res) {
+            res = res.origin;
+            $('#SHOWPHOTO').attr('src', res);
+          }
+        })
+      }
       let img = document.getElementById('SHOWPHOTO');
       img.onload = function () {
         const snackbar = document.querySelector(".example-closeable");
@@ -134,7 +152,19 @@
       var keynum = (event.keyCode ? event.keyCode : event.which);
       if (keynum == '13') {
         const snackbar = document.querySelector(".example-closeable");
-        $('#SHOWPHOTO').attr('src', 'https://pixiv.re/' + $('#TEXTofFIELD').val() + $('#IMGformat').val());
+        if ($('#proxy').val() == 1)
+          $('#SHOWPHOTO').attr('src', 'https://pixiv.re/' + $('#TEXTofFIELD').val() + $('#IMGformat').val());
+        else {
+          $.ajax({
+            type: "GET",
+            url: "https://api.acerkaio.top/pid/" + $('#TEXTofFIELD').val(),
+            dataType: "json",
+            success: function (res) {
+              res = res.origin;
+              $('#SHOWPHOTO').attr('src', res);
+            }
+          })
+        }
         snackbar.open = true;
         let img = document.getElementById('SHOWPHOTO');
         img.onload = function () {

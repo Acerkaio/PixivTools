@@ -1,11 +1,12 @@
 // 命名规则: 主版本号.功能更新数.bug修复或小更新数
-var ver = "1.3.1";
+var ver = "1.3.1_Debug";
 var OldVersion = localStorage.getItem("version");
 if (OldVersion != ver) {
     localStorage.setItem("version", ver);
     $("#body").html($("#body").html() + `
         <mdui-dialog close-on-esc class="ver-overlay">
-            按下 ESC 关闭
+            按下 ESC 关闭 
+            <h1>施工中</h1>
             <h2>版本: ${ver}</h2>
             <h4>[2024.9.07 12:28] 更新内容: </h4>
             <p>增加每日榜单 (+)</p>
