@@ -56,17 +56,17 @@
     <mdui-navigation-drawer open="false" class="navigation-drawer" id="navigation-drawer" style="width: 100%"
       close-on-esc close-on-overlay-click contained modal="true">
       <mdui-list>
-        <a style="text-decoration: none;" href="../index.html"><mdui-list-item>PID to IMG</mdui-list-item></a>
-        <a style="text-decoration: none;" href="../randsearch/index.html"><mdui-list-item>Search</mdui-list-item></a>
-        <a style="text-decoration: none;" href="../illustrator/index.html"><mdui-list-item>illustrator</mdui-list-item></a>
+        <a style="text-decoration: none;" href="../"><mdui-list-item>PID to IMG</mdui-list-item></a>
+        <a style="text-decoration: none;" href="../randsearch/"><mdui-list-item>Search</mdui-list-item></a>
+        <a style="text-decoration: none;" href="../illustrator/"><mdui-list-item>illustrator</mdui-list-item></a>
+        <a style="text-decoration: none;" href="../rank/"><mdui-list-item>rank</mdui-list-item></a>
         <mdui-list-item>More...</mdui-list-item>
         <mdui-list-item id="CLOSENavigationDrawer"><ion-icon name="arrow-dropleft"></ion-icon>返回</mdui-list-item>
       </mdui-list>
     </mdui-navigation-drawer>
 
     <mdui-layout-main class="layout-main" style="min-height: 300px; margin: 20px; height: 90vh !important;">
-      <mdui-text-field id="TEXTofFIELD" label="Input UID" helper="请输入用户 ID|如:7238253"
-        helper-on-focus></mdui-text-field>
+      <mdui-text-field id="TEXTofFIELD" label="Input UID" helper="请输入用户 ID|如:7238253" helper-on-focus></mdui-text-field>
       <div style="margin-top: 0px;">
         <mdui-button id="GetPhoto">GO</mdui-button>
         <!-- <mdui-button id="DOWNLOADALL" style="margin-top: 4px;">批量下载</mdui-button> -->
@@ -115,11 +115,16 @@
     })
   </script>
   <!-- <script src="./list.js"></script> -->
-  
+
   <script>
     var ans = [], lasted = 0;
     var page = [];
     async function GetUid(uid) {
+      $('#container').html(`
+        <div style="margin: 0 auto; text-align: center;">
+          <mdui-circular-progress style="margin: 0 auto;"></mdui-circular-progress>
+        </div>
+      `);
       const b = await new Promise((resolve, reject) => {
         $.ajax({
           type: "GET",
@@ -164,7 +169,7 @@
       // console.log(id);
       page[id]++;
       if (page[id] == 1)
-      $(`#sch${id}`).attr('src', `https://pixiv.re/${ans[id]}.png`);
+        $(`#sch${id}`).attr('src', `https://pixiv.re/${ans[id]}.png`);
       else $(`#sch${id}`).attr('src', `https://pixiv.re/${ans[id]}-${page[id]}.png`);
     }
     function flk(id) {
@@ -172,7 +177,7 @@
       if (page[id] > 1)
         page[id]--;
       if (page[id] == 1)
-      $(`#sch${id}`).attr('src', `https://pixiv.re/${ans[id]}.png`);
+        $(`#sch${id}`).attr('src', `https://pixiv.re/${ans[id]}.png`);
       else $(`#sch${id}`).attr('src', `https://pixiv.re/${ans[id]}-${page[id]}.png`);
     }
 

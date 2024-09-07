@@ -1,5 +1,9 @@
 function list(keyword) {
-    $('#container').html('');
+    $('#container').html(`
+        <div style="margin: 0 auto; text-align: center;">
+          <mdui-circular-progress style="margin: 0 auto;"></mdui-circular-progress>
+        </div>
+      `);
     let catchColumn = Math.max(parseInt((document.getElementById("container").clientWidth + 20) / (300 + 20)), 1);
     let pdS = (document.getElementById("container").clientWidth - catchColumn * 320 + 20) / 2;
     let sumHeight = toTwoDimensionalArray(catchColumn).map(() => 0);
@@ -12,6 +16,7 @@ function list(keyword) {
         success: function (res) {
             // console.log(res);
             ans = res;
+            $('#container').html('');
             for (var id in res) {
                 // console.log(res[id].pid);
                 const img = new Image();

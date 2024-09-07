@@ -1,5 +1,5 @@
 // 命名规则: 主版本号.功能更新数.bug修复或小更新数
-var ver = "1.2.0";
+var ver = "1.3.1";
 var OldVersion = localStorage.getItem("version");
 if (OldVersion != ver) {
     localStorage.setItem("version", ver);
@@ -7,7 +7,11 @@ if (OldVersion != ver) {
         <mdui-dialog close-on-esc class="ver-overlay">
             按下 ESC 关闭
             <h2>版本: ${ver}</h2>
-            <h4>[2024.9.06 016:10] 更新内容: </h4>
+            <h4>[2024.9.07 12:28] 更新内容: </h4>
+            <p>增加每日榜单 (+)</p>
+            <p>增加加载动画 (+)</p>
+            <h3>版本: 1.2.0</h3>
+            <h4>[2024.9.06 16:10] 更新内容: </h4>
             <p>增加搜索画师ID功能 (+)</p>
             <h3>版本: 1.1.3</h3>
             <h4>[2024.7.27 08:30] 更新内容: </h4>
