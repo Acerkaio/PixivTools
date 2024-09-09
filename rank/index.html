@@ -171,7 +171,7 @@
             $('#container').html('');
             for (var id in res) {
               lasted = id;
-              page[id] = 1;
+              page[id] = 0;
               // $('#container').html($('#container').html() +
               //   `
               // <br>
@@ -204,15 +204,15 @@
     function clk(id) {
       page[id]++;
       if (page[id] == 1)
-        $(`#sch${id}`).attr('src', `https://pixiv.re/${ans[id]}.png`);
-      else $(`#sch${id}`).attr('src', `https://pixiv.re/${ans[id]}-${page[id]}.png`);
+        $(`#sch${id}`).attr('src', `${url[id].slice(0, -5)}${page[id]}${url[id].slice(-4)}`);
+      else $(`#sch${id}`).attr('src', `${url[id].slice(0, -5)}${page[id]}${url[id].slice(-4)}`);
     }
     function flk(id) {
-      if (page[id] > 1)
+      if (page[id] > 0)
         page[id]--;
       if (page[id] == 1)
-        $(`#sch${id}`).attr('src', `https://pixiv.re/${ans[id]}.png`);
-      else $(`#sch${id}`).attr('src', `https://pixiv.re/${ans[id]}-${page[id]}.png`);
+        $(`#sch${id}`).attr('src', `${url[id].slice(0, -5)}${page[id]}${url[id].slice(-4)}`);
+      else $(`#sch${id}`).attr('src', `${url[id].slice(0, -5)}${page[id]}${url[id].slice(-4)}`);
     }
 
   </script>

@@ -1,5 +1,5 @@
 // 命名规则: 主版本号.功能更新数.bug修复或小更新数
-var ver = "1.3.1_Debug";
+var ver = "1.3.1_Debug_beta_2";
 var OldVersion = localStorage.getItem("version");
 if (OldVersion != ver) {
     localStorage.setItem("version", ver);
