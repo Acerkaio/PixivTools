@@ -115,10 +115,52 @@
     })
   </script>
   <!-- <script src="./list.js"></script> -->
-
   <script>
     var ans = [], lasted = 0;
-    var page = [];
+    var page = [], url = [], msturl = [];
+  </script>
+  <script>
+    function inscf(pid, id) {
+      $.ajax({
+        type: "GET",
+        url: "https://api.acerkaio.top/pid/" + pid,
+        dataType: "json",
+        success: function (res) {
+          // res = res;
+          url[id] = res.origin;
+          msturl[id] = res.master;
+        }
+      })
+    }
+
+    async function wt() {
+      const b = await new Promise((resolve, reject) => {
+        $.ajax({
+          type: "GET",
+          url: "https://api.acerkaio.top/pid/87740032",
+          dataType: "json",
+          success: function (res) {
+            setTimeout(function () {
+              resolve('time')
+            }, 500)
+          }
+        })
+      })
+      for (var oo in url) {
+        $('#container').html($('#container').html() +
+          `
+              <br>
+              <div class="Aimg" >
+                <img src="${msturl[oo]}" id="sch${oo}" alt="IMG ERROR">
+              </div>  
+              <div style="margin: 0 auto; text-align:center;"><mdui-button onclick=flk(${oo})>BACK</mdui-button> <mdui-button onclick=clk(${oo})>NEXT</mdui-button> <a style="text-decoration: none;" target="_blank" href="${url[oo]}"><mdui-button>ORIGIN</mdui-button></a></div>
+              <br>
+        `
+        );
+      }
+
+    }
+
     async function GetUid(uid) {
       $('#container').html(`
         <div style="margin: 0 auto; text-align: center;">
@@ -137,19 +179,21 @@
             $('#container').html('');
             for (var id in res) {
               lasted = id;
-              page[id] = 1;
-              $('#container').html($('#container').html() +
-                `
-              <br>
-              <div class="Aimg" >
-                <img src="https://pixiv.re/${res[id]}.png" id="sch${id}" alt="IMG ERROR">
-              </div>  
-              <div style="margin: 0 auto; text-align:center;"><mdui-button onclick=flk(${id})>BACK</mdui-button> <mdui-button onclick=clk(${id})>NEXT</mdui-button></div>
-              <br>
-              `
-              );
+              page[id] = 0;
+              inscf(res[id], id);
+              // $('#container').html($('#container').html() +
+              //   `
+              // <br>
+              // <div class="Aimg" >
+              //   <img src="https://pixiv.re/${res[id]}.png" id="sch${id}" alt="IMG ERROR">
+              // </div>  
+              // <div style="margin: 0 auto; text-align:center;"><mdui-button onclick=flk(${id})>BACK</mdui-button> <mdui-button onclick=clk(${id})>NEXT</mdui-button></div>
+              // <br>
+              // `
+              // );
 
             }
+            wt();
             setTimeout(function () {
               resolve('time')
             }, 500)
@@ -166,19 +210,17 @@
   </script>
   <script>
     function clk(id) {
-      // console.log(id);
       page[id]++;
       if (page[id] == 1)
-        $(`#sch${id}`).attr('src', `https://pixiv.re/${ans[id]}.png`);
-      else $(`#sch${id}`).attr('src', `https://pixiv.re/${ans[id]}-${page[id]}.png`);
+        $(`#sch${id}`).attr('src', `${url[id].slice(0, -5)}${page[id]}${url[id].slice(-4)}`);
+      else $(`#sch${id}`).attr('src', `${url[id].slice(0, -5)}${page[id]}${url[id].slice(-4)}`);
     }
     function flk(id) {
-      // console.log(id);
-      if (page[id] > 1)
+      if (page[id] > 0)
         page[id]--;
       if (page[id] == 1)
-        $(`#sch${id}`).attr('src', `https://pixiv.re/${ans[id]}.png`);
-      else $(`#sch${id}`).attr('src', `https://pixiv.re/${ans[id]}-${page[id]}.png`);
+        $(`#sch${id}`).attr('src', `${url[id].slice(0, -5)}${page[id]}${url[id].slice(-4)}`);
+      else $(`#sch${id}`).attr('src', `${url[id].slice(0, -5)}${page[id]}${url[id].slice(-4)}`);
     }
 
   </script>
