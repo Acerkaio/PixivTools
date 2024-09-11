@@ -32,7 +32,7 @@ function list(keyword) {
                 newItem.style.height = height + 'px';
                 newItem.style.transform = `translate(${minIndex * (300 + 20) + pdS}px, ${sumHeight[minIndex]}px)`;
                 newItem.innerHTML = `
-                <img src="https://pixiv.re/${res[id].pid}.png" alt="ERR" style="width: 300px; height: auto;">
+                <img src="${res[id].url}" alt="ERR" style="width: 300px; height: auto;">
 
                 `
                 document.getElementById("container").appendChild(newItem);
