@@ -65,6 +65,7 @@
       </mdui-list>
     </mdui-navigation-drawer>
 
+
     <mdui-layout-main class="layout-main" style="min-height: 300px; margin: 20px; height: 90vh !important;">
       <div class="list" id="container" style="height: fit-content !important; margin-top: 20px;">
         <div style="margin: 0 auto; text-align: center;">
@@ -78,6 +79,10 @@
     <mdui-avatar slot="close-button" icon="search-outline"><ion-icon name="search-outline"></ion-icon></mdui-avatar>
   </mdui-snackbar>
 
+  <mdui-fab style="position: fixed; right: 80px; bottom: 40px;" onclick="nxtpgs()"
+    icon="caret-forward-outline"><ion-icon name="caret-forward-outline"></ion-icon></mdui-fab>
+  <mdui-fab style="position: fixed; right: 150px; bottom: 40px;" onclick="bgpgs()"
+    icon="caret-forward-outline"><ion-icon name="arrow-back-outline"></ion-icon></mdui-fab>
 
 
   <!-- JQ -->
@@ -129,7 +134,27 @@
       })
     }
   </script>
-
+  <script>
+    var NDPGS = 1;
+    function nxtpgs() {
+      NDPGS++;
+      $('#container').html(`
+      <div style="margin: 0 auto; text-align: center;">
+          <mdui-circular-progress style="margin: 0 auto;"></mdui-circular-progress>
+        </div>`)
+      GETrank(NDPGS);
+    }
+    function bgpgs() {
+      if (NDPGS > 1) {
+        $('#container').html(`
+      <div style="margin: 0 auto; text-align: center;">
+          <mdui-circular-progress style="margin: 0 auto;"></mdui-circular-progress>
+        </div>`)
+        NDPGS--;
+        GETrank(NDPGS);
+      }
+    }
+  </script>
   <script>
     async function wt() {
       const b = await new Promise((resolve, reject) => {
@@ -158,6 +183,7 @@
       }
 
     }
+
     async function GETrank(pages) {
       const b = await new Promise((resolve, reject) => {
         $.ajax({
@@ -172,16 +198,6 @@
             for (var id in res) {
               lasted = id;
               page[id] = 0;
-              // $('#container').html($('#container').html() +
-              //   `
-              // <br>
-              // <div class="Aimg" >
-              //   <img src="https://pixiv.re/${res[id]}.png" id="sch${id}" alt="IMG ERROR">
-              // </div>  
-              // <div style="margin: 0 auto; text-align:center;"><mdui-button onclick=flk(${id})>BACK</mdui-button> <mdui-button onclick=clk(${id})>NEXT</mdui-button></div>
-              // <br>
-              // `
-              // );
               inscf(res[id], id);
 
             }
