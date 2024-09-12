@@ -126,7 +126,6 @@
         url: "https://api.acerkaio.top/pid/" + pid,
         dataType: "json",
         success: function (res) {
-          // res = res;
           url[id] = res.origin;
           msturl[id] = res.master;
         }
@@ -146,6 +145,7 @@
           }
         })
       })
+      $('#container').html("");
       for (var oo in url) {
         $('#container').html($('#container').html() +
           `
@@ -176,22 +176,11 @@
             res = res.body.user_illust_ids;
             // console.log(res);
             ans = res;
-            $('#container').html('');
+            // $('#container').html('');
             for (var id in res) {
               lasted = id;
               page[id] = 0;
               inscf(res[id], id);
-              // $('#container').html($('#container').html() +
-              //   `
-              // <br>
-              // <div class="Aimg" >
-              //   <img src="https://pixiv.re/${res[id]}.png" id="sch${id}" alt="IMG ERROR">
-              // </div>  
-              // <div style="margin: 0 auto; text-align:center;"><mdui-button onclick=flk(${id})>BACK</mdui-button> <mdui-button onclick=clk(${id})>NEXT</mdui-button></div>
-              // <br>
-              // `
-              // );
-
             }
             wt();
             setTimeout(function () {
@@ -201,10 +190,7 @@
         })
 
       })
-
       console.log(lasted);
-
-
     }
 
   </script>

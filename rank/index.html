@@ -170,6 +170,7 @@
           }
         })
       })
+      $('#container').html('');
       for (var oo in url) {
         $('#container').html($('#container').html() +
           `
@@ -195,7 +196,7 @@
             res = res.pid;
             console.log(res);
             ans = res;
-            $('#container').html('');
+            
             for (var id in res) {
               lasted = id;
               page[id] = 0;
