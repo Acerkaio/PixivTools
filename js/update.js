@@ -1,5 +1,5 @@
 // 命名规则: 主版本号.功能更新数.bug修复或小更新数
-var ver = "1.3.4";
+var ver = "1.3.5";
 var OldVersion = localStorage.getItem("version");
 if (OldVersion != ver) {
     localStorage.setItem("version", ver);
@@ -8,6 +8,9 @@ if (OldVersion != ver) {
             按下 ESC 关闭 
             <h1>施工中</h1>
             <h2>版本: ${ver}</h2>
+            <h4>[2024.9.13 20:34] 更新内容: </h4>
+            <p>修复 origin 按钮 url 无法换页码(bug fixed)</p>
+            <h3>版本: 1.3.4</h3>
             <h4>[2024.9.12 12:39] 更新内容: </h4>
             <p>用户搜索更改 (?)</p>
             <p>优化一些 (?)</p>

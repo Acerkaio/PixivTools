@@ -81,7 +81,7 @@
     <mdui-avatar slot="close-button" icon="search-outline"><ion-icon name="search-outline"></ion-icon></mdui-avatar>
   </mdui-snackbar>
 
-
+  <a href="" style="display: none;" id="downloada" target="_blank">hf</a>
 
   <!-- JQ -->
   <!-- <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.js"></script> -->
@@ -117,7 +117,7 @@
   <!-- <script src="./list.js"></script> -->
   <script>
     var ans = [], lasted = 0;
-    var page = [], url = [], msturl = [];
+    var page = [], url = [], msturl = [], nowurl = [];
   </script>
   <script>
     function inscf(pid, id) {
@@ -127,6 +127,7 @@
         dataType: "json",
         success: function (res) {
           url[id] = res.origin;
+          nowurl[id] = res.origin;
           msturl[id] = res.master;
         }
       })
@@ -195,18 +196,25 @@
 
   </script>
   <script>
+    function openorigin(id) {
+      $(`#downloada`).attr('href', nowurl[id]);
+      setTimeout(() => {
+        document.getElementById('downloada').click();
+      }, 1);
+
+    }
+  </script>
+  <script>
     function clk(id) {
       page[id]++;
-      if (page[id] == 1)
-        $(`#sch${id}`).attr('src', `${url[id].slice(0, -5)}${page[id]}${url[id].slice(-4)}`);
-      else $(`#sch${id}`).attr('src', `${url[id].slice(0, -5)}${page[id]}${url[id].slice(-4)}`);
+      $(`#sch${id}`).attr('src', `${msturl[id].slice(0, -16)}${page[id]}${msturl[id].slice(-15)}`);
+      nowurl[id] = `${url[id].slice(0, -5)}${page[id]}${url[id].slice(-4)}`;
     }
     function flk(id) {
       if (page[id] > 0)
         page[id]--;
-      if (page[id] == 1)
-        $(`#sch${id}`).attr('src', `${url[id].slice(0, -5)}${page[id]}${url[id].slice(-4)}`);
-      else $(`#sch${id}`).attr('src', `${url[id].slice(0, -5)}${page[id]}${url[id].slice(-4)}`);
+      $(`#sch${id}`).attr('src', `${msturl[id].slice(0, -16)}${page[id]}${msturl[id].slice(-15)}`);
+      nowurl[id] = `${url[id].slice(0, -5)}${page[id]}${url[id].slice(-4)}`;
     }
 
   </script>
