@@ -84,7 +84,7 @@
   <mdui-fab style="position: fixed; right: 150px; bottom: 40px;" onclick="bgpgs()"
     icon="caret-forward-outline"><ion-icon name="arrow-back-outline"></ion-icon></mdui-fab>
 
-
+  <a href="" style="display: none;" id="downloada" target="_blank">hf</a>
   <!-- JQ -->
   <!-- <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.js"></script> -->
   <script src="../js/Jquery/jq.min.js"></script>
@@ -119,7 +119,7 @@
   <!-- <script src="./list.js"></script> -->
   <script>
     var ans = [], lasted = 0;
-    var page = [], url = [], msturl = [];
+    var page = [], url = [], msturl = [], nowurl = [];
   </script>
   <script>
     function inscf(pid, id) {
@@ -130,9 +130,20 @@
         success: function (res) {
           // res = res;
           url[id] = res.origin;
+          nowurl[id] = res.origin;
           msturl[id] = res.master;
         }
       })
+    }
+  </script>
+  <script>
+    function openorigin(id) {
+      console.log("???");
+      $(`#downloada`).attr('href', nowurl[id]);
+      setTimeout(() => {
+        document.getElementById('downloada').click();
+      }, 1);
+      
     }
   </script>
   <script>
@@ -178,7 +189,7 @@
               <div class="Aimg" >
                 <img src="${msturl[oo]}" id="sch${oo}" alt="IMG ERROR">
               </div>  
-              <div style="margin: 0 auto; text-align:center;"><mdui-button onclick=flk(${oo})>BACK</mdui-button> <mdui-button onclick=clk(${oo})>NEXT</mdui-button> <a style="text-decoration: none;" target="_blank" href="${url[oo]}"><mdui-button>ORIGIN</mdui-button></a></div>
+              <div style="margin: 0 auto; text-align:center;"><mdui-button onclick=flk(${oo})>BACK</mdui-button> <mdui-button onclick=clk(${oo})>NEXT</mdui-button> <a style="text-decoration: none;" onclick="openorigin(${oo})"><mdui-button>ORIGIN</mdui-button></a></div>
               <br>
         `
         );
@@ -221,16 +232,18 @@
   <script>
     function clk(id) {
       page[id]++;
-      if (page[id] == 1)
-        $(`#sch${id}`).attr('src', `${url[id].slice(0, -5)}${page[id]}${url[id].slice(-4)}`);
-      else $(`#sch${id}`).attr('src', `${url[id].slice(0, -5)}${page[id]}${url[id].slice(-4)}`);
+      $(`#sch${id}`).attr('src', `${msturl[id].slice(0, -16)}${page[id]}${msturl[id].slice(-15)}`);
+      nowurl[id] = `${url[id].slice(0, -5)}${page[id]}${url[id].slice(-4)}`;
+
+      // console.log(`${msturl[id].slice(0, -16)}`);
+      // console.log(`${msturl[id].slice(-15)}`);
     }
     function flk(id) {
       if (page[id] > 0)
         page[id]--;
-      if (page[id] == 1)
-        $(`#sch${id}`).attr('src', `${url[id].slice(0, -5)}${page[id]}${url[id].slice(-4)}`);
-      else $(`#sch${id}`).attr('src', `${url[id].slice(0, -5)}${page[id]}${url[id].slice(-4)}`);
+      $(`#sch${id}`).attr('src', `${msturl[id].slice(0, -16)}${page[id]}${msturl[id].slice(-15)}`);
+      nowurl[id] = `${url[id].slice(0, -5)}${page[id]}${url[id].slice(-4)}`;
+
     }
 
   </script>
